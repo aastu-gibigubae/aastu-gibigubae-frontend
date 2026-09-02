@@ -12,6 +12,15 @@ export default {
         accent: {
           DEFAULT: "#FFC800", // gold — CTAs, highlights, active states
         },
+        // Near-black navy used on auth screens (Login/Register) — distinct
+        // from primary-dark, which is reserved for navbar/footer.
+        ink: {
+          DEFAULT: "#0B1330",
+        },
+        // Pale blue-gray section backgrounds (e.g. Leadership block, stat bar)
+        surface: {
+          DEFAULT: "#F4F6FB",
+        },
       },
       fontFamily: {
         // English display/body faces from Figma

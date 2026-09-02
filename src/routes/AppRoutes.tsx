@@ -10,6 +10,7 @@ import Magazine from '@pages/Magazine';
 import Contact from '@pages/Contact';
 import Login from '@pages/Login';
 import Register from '@pages/Register';
+import UiPreview from '@pages/UiPreview'; // TEMPORARY — remove with milestone 3
 
 /**
  * Auth/role guards (ProtectedRoute, per Visitor/Registered/Sub-Admin/Admin
@@ -31,6 +32,8 @@ export function AppRoutes() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* TEMPORARY — remove this route once milestone 3 (Home page) uses these components for real */}
+        <Route path="/_ui" element={<UiPreview />} />
       </Route>
     </Routes>
   );
