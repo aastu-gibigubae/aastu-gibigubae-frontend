@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Font files go in src/assets/fonts/ and get declared here.
+  League Spartan and Abyssinica SIL are open-source (Google Fonts) —
+  self-host them or load via @import once files are added.
+  Gotham / exodus / Adwa are commercial or non-standard — confirm
+  licensing/source before shipping; fall back gracefully until then.
+*/
+
+@layer base {
+  html {
+    font-family: theme('fontFamily.body');
+  }
+
+  html[lang='am'] body,
+  .font-am {
+    font-family: theme('fontFamily.am');
+  }
+}

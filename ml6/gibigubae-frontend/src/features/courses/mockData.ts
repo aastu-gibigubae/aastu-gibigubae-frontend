@@ -1,0 +1,76 @@
+import type { CourseItem } from './types';
+
+const CHURCH_HISTORY_LESSONS = Array.from({ length: 7 }, (_, i) => ({
+  id: String(i + 1),
+  title: 'Introduction to Church History',
+}));
+
+/** TEMPORARY placeholder dataset — see api.ts for how this gets replaced. */
+export const MOCK_COURSES: CourseItem[] = [
+  {
+    id: '1',
+    title: 'Church History',
+    category: 'bible',
+    description: 'A day to worship the birth of Jesus Christ. A day to worship the birth of Jesus Christ.',
+    dateLabel: 'Tire 24, 2019',
+    isoDate: '2026-05-24',
+    time: '12:00 PM - 8:00PM',
+    location: 'AASTU',
+    instructor: 'Dn. Abebe',
+    weeks: '6 Weeks',
+    aboutText:
+      'Church History explores the journey of the Ethiopian Orthodox Tewahdeo Church — its faith, tradition, martyrs, and spiritual legacy. This course helps you understand the rich history and teaching that shape our faith and identity.',
+    learnItems: [
+      'The history and establishment of the EOTC',
+      'The history and establishment of the EOTC',
+      'The history and establishment of the EOTC',
+      'The history and establishment of the EOTC',
+    ],
+    lessons: CHURCH_HISTORY_LESSONS,
+  },
+  {
+    id: '2',
+    title: 'Bible Study',
+    category: 'bible',
+    description: 'Deepen your knowledge about the Bible through weekly guided readings and discussion.',
+    dateLabel: 'Tire 24, 2019',
+    isoDate: '2026-06-01',
+    time: '2:00 PM - 4:00PM',
+    location: 'AASTU',
+    instructor: 'Dn. Abebe',
+    weeks: '6 Weeks',
+    aboutText: 'A weekly guided study through key books of the Bible, with group discussion and reflection.',
+    learnItems: ['Old and New Testament overview', 'Guided group discussion', 'Weekly reading plan'],
+    lessons: Array.from({ length: 6 }, (_, i) => ({ id: String(i + 1), title: 'Bible Study Session' })),
+  },
+  {
+    id: '3',
+    title: 'Foundations of Theology',
+    category: 'theology',
+    description: 'An introductory course covering the core theological teachings of the Orthodox faith.',
+    dateLabel: 'Tir 12, 2019',
+    isoDate: '2026-06-10',
+    time: '10:00 AM - 12:00PM',
+    location: 'AASTU',
+    instructor: 'Dn. Henok',
+    weeks: '8 Weeks',
+    aboutText: 'Covers foundational Orthodox theology — Trinity, salvation, sacraments, and church tradition.',
+    learnItems: ['Core theological concepts', 'Church tradition and sacraments', 'Q&A with instructor'],
+    lessons: Array.from({ length: 8 }, (_, i) => ({ id: String(i + 1), title: 'Theology Lecture' })),
+  },
+  {
+    id: '4',
+    title: "Ge'ez Language Basics",
+    category: 'language',
+    description: "An introduction to reading and understanding Ge'ez, the liturgical language of the church.",
+    dateLabel: 'Hidar 5, 2019',
+    isoDate: '2026-06-15',
+    time: '4:00 PM - 6:00PM',
+    location: 'AASTU',
+    instructor: 'Dn. Abebe',
+    weeks: '10 Weeks',
+    aboutText: "Learn to read Ge'ez script and understand common liturgical phrases used in services.",
+    learnItems: ["Ge'ez alphabet (Fidel)", 'Common liturgical phrases', 'Reading practice'],
+    lessons: Array.from({ length: 10 }, (_, i) => ({ id: String(i + 1), title: "Ge'ez Lesson" })),
+  },
+];
