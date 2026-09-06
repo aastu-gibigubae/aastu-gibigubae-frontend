@@ -8,6 +8,10 @@ interface ImagePlaceholderProps extends HTMLAttributes<HTMLDivElement> {
   round?: boolean;
   /** 'dark' for use on dark section backgrounds (e.g. Recorded Sessions) — keeps the glyph visible. */
   tone?: 'light' | 'dark';
+  /** Real image source — when provided, renders an actual <img> instead of the placeholder glyph. */
+  src?: string;
+  /** Required alongside `src` for accessibility; ignored otherwise. */
+  alt?: string;
 }
 
 const TONE_CLASSES = {
@@ -16,20 +20,34 @@ const TONE_CLASSES = {
 } as const;
 
 /**
- * Flat gray block with a simple image glyph — used everywhere a real photo
- * or video thumbnail will eventually go. Swap for an <img>/CDN url once the
- * media library feature is wired up; nothing else about the layout should
- * need to change since this fills its parent exactly like an <img> would.
+ * Flat gray block with a simple image glyph by default — used everywhere a
+ * real photo or video thumbnail doesn't exist yet. Pass `src` (+ `alt`) to
+ * render a real photo instead; the aspect/round/className framing stays
+ * identical either way, so call sites can adopt real images one at a time
+ * without touching layout.
  */
-export function ImagePlaceholder({ aspect = 'aspect-video', round = false, tone = 'light', className, ...rest }: ImagePlaceholderProps) {
+export function ImagePlaceholder({
+  aspect = 'aspect-video',
+  round = false,
+  tone = 'light',
+  src,
+  alt = '',
+  className,
+  ...rest
+}: ImagePlaceholderProps) {
+  const shapeClasses = round ? 'aspect-square rounded-full' : clsx(aspect, 'rounded-lg');
+
+  if (src) {
+    return (
+      <div className={clsx('w-full overflow-hidden', shapeClasses, className)} {...rest}>
+        <img src={src} alt={alt} className="h-full w-full object-cover" />
+      </div>
+    );
+  }
+
   return (
     <div
-      className={clsx(
-        'flex w-full items-center justify-center',
-        TONE_CLASSES[tone],
-        round ? 'aspect-square rounded-full' : clsx(aspect, 'rounded-lg'),
-        className,
-      )}
+      className={clsx('flex w-full items-center justify-center', TONE_CLASSES[tone], shapeClasses, className)}
       {...rest}
     >
       <svg viewBox="0 0 24 24" fill="none" className="h-1/4 w-1/4 min-h-6 min-w-6" aria-hidden="true">

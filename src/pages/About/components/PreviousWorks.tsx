@@ -1,5 +1,6 @@
 import { PageContainer } from '@components/layout/PageContainer';
 import { ImagePlaceholder } from '@components/ui';
+import { images } from '@/assets/images';
 
 export function PreviousWorks() {
   return (
@@ -13,7 +14,7 @@ export function PreviousWorks() {
             students to learn and grow through music and worship together.
           </p>
         </div>
-        <ImagePlaceholder aspect="aspect-[4/3]" />
+        <ImagePlaceholder aspect="aspect-[4/3]" src={images.kingDavidPainting} alt="King David playing the Begena" />
       </PageContainer>
     </section>
   );

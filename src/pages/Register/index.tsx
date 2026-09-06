@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, ImagePlaceholder, Input, Select } from '@components/ui';
+import { images } from '@/assets/images';
 import { useAuth } from '@hooks/useAuth';
 import { registerSchema, type RegisterFormValues } from './registerSchema';
 import { DEPARTMENT_OPTIONS, GENDER_OPTIONS } from './departmentOptions';
@@ -25,7 +26,7 @@ export default function Register() {
     <div className="grid min-h-screen bg-ink lg:grid-cols-2">
       <div className="flex items-center justify-center px-4 py-16 sm:px-8">
         <div className="w-full max-w-md">
-          <ImagePlaceholder round tone="dark" className="h-16 w-16" />
+          <ImagePlaceholder round className="h-16 w-16" src={images.orgSealLogo} alt="AASTU Gibigubae" />
           <h1 className="mt-6 font-heading text-3xl text-white">Create your account</h1>
           <p className="mt-1 text-sm text-accent">Join AASTU Gibi Gubae</p>
 
@@ -86,7 +87,12 @@ export default function Register() {
       </div>
 
       <div className="relative hidden lg:block">
-        <ImagePlaceholder aspect="aspect-auto" tone="dark" className="h-full rounded-none" />
+        <ImagePlaceholder
+          aspect="aspect-auto"
+          src={images.ornateChurchInterior}
+          alt="Church interior"
+          className="h-full rounded-none"
+        />
       </div>
     </div>
   );

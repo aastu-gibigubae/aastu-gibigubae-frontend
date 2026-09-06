@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Card, ImagePlaceholder, buttonStyles } from '@components/ui';
+import { photoFromPool } from '@/assets/images';
 import type { CourseItem } from '../types';
 
 export function CourseSummaryCard({ course }: { course: CourseItem }) {
   return (
-    <Card media={<ImagePlaceholder />}>
+    <Card media={<ImagePlaceholder src={photoFromPool(Number(course.id))} alt={course.title} />}>
       <h3 className="font-heading text-base text-primary-dark">{course.title}</h3>
       <p className="mt-1 line-clamp-2 text-xs text-primary-dark/60">{course.description}</p>
       <p className="mt-2 text-xs text-primary-dark/50">{course.lessons.length} lessons</p>

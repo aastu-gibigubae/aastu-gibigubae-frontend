@@ -1,12 +1,19 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { ImagePlaceholder, buttonStyles } from '@components/ui';
+import { images } from '@/assets/images';
 import { missionVisionValues } from '../mockData';
 
 export function AboutHero() {
   return (
     <section className="relative overflow-hidden bg-ink text-white">
-      <ImagePlaceholder aspect="aspect-video" tone="dark" className="absolute inset-0 h-full w-full rounded-none" />
+      <ImagePlaceholder
+        aspect="aspect-video"
+        tone="dark"
+        src={images.candlelightCrowd2}
+        alt="Candlelight vigil"
+        className="absolute inset-0 h-full w-full rounded-none"
+      />
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" aria-hidden="true" />
 
       <PageContainer className="relative pb-24 pt-14 sm:pb-32">

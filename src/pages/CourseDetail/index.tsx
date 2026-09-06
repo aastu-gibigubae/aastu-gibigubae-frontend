@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
-import { Badge, Breadcrumb, ImagePlaceholder } from '@components/ui';
+import { PageHero } from '@components/layout/PageHero';
+import { Badge, Breadcrumb } from '@components/ui';
+import { photoFromPool } from '@/assets/images';
 import { useCourse, useRelatedCourses } from '@features/courses/hooks/useCourses';
 import { CourseSummaryCard } from '@features/courses/components/CourseSummaryCard';
 
@@ -23,15 +25,12 @@ export default function CourseDetail() {
 
   return (
     <div>
-      <div className="relative overflow-hidden bg-ink text-white">
-        <ImagePlaceholder aspect="aspect-video" tone="dark" className="absolute inset-0 h-full w-full rounded-none opacity-40" />
-        <PageContainer className="relative py-14">
-          <Breadcrumb
-            items={[{ label: 'Home', to: '/' }, { label: 'Courses', to: '/courses' }, { label: course.title }]}
-          />
-          <h1 className="mt-4 font-heading text-3xl">{course.title}</h1>
-        </PageContainer>
-      </div>
+      <PageHero image={photoFromPool(Number(course.id))} imageAlt={course.title} compact>
+        <Breadcrumb
+          items={[{ label: 'Home', to: '/' }, { label: 'Courses', to: '/courses' }, { label: course.title }]}
+        />
+        <h1 className="mt-4 font-heading text-3xl">{course.title}</h1>
+      </PageHero>
 
       <PageContainer className="py-10">
         <div className="grid gap-6 lg:grid-cols-[1fr_320px]">

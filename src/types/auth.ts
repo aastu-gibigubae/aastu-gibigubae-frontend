@@ -13,6 +13,10 @@ export interface User {
   role: Role;
   department?: string;
   studentId?: string;
+  email?: string;
+  gender?: 'male' | 'female';
+  createdAt?: string; // ISO date
+  status?: 'active' | 'inactive';
 }
 
 export interface AuthSession {

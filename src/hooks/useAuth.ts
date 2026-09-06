@@ -12,6 +12,7 @@ export function useAuth() {
   const status = useAuthStore((state) => state.status);
   const setSession = useAuthStore((state) => state.setSession);
   const clearSession = useAuthStore((state) => state.clearSession);
+  const updateUser = useAuthStore((state) => state.updateUser);
 
   const loginMutation = useMutation({
     mutationFn: (payload: LoginPayload) => authApi.login(payload),
@@ -39,5 +40,6 @@ export function useAuth() {
     isRegistering: registerMutation.isPending,
     registerError: registerMutation.error,
     logout: logoutMutation.mutateAsync,
+    updateUser,
   };
 }

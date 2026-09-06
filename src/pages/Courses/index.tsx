@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { PageContainer } from '@components/layout/PageContainer';
-import { Breadcrumb, ImagePlaceholder, Pagination, SearchInput } from '@components/ui';
+import { PageHero } from '@components/layout/PageHero';
+import { Breadcrumb, Pagination, SearchInput } from '@components/ui';
+import { images } from '@/assets/images';
 import { useCourses } from '@features/courses/hooks/useCourses';
 import { CourseCard } from '@features/courses/components/CourseCard';
 import { CourseCategoryTabs } from '@features/courses/components/CourseCategoryTabs';
@@ -19,18 +21,15 @@ export default function Courses() {
 
   return (
     <div>
-      <div className="relative overflow-hidden bg-ink text-white">
-        <ImagePlaceholder aspect="aspect-video" tone="dark" className="absolute inset-0 h-full w-full rounded-none opacity-40" />
-        <PageContainer className="relative py-14">
-          <Breadcrumb items={[{ label: 'Home', to: '/' }, { label: 'Courses' }]} />
-          <h1 className="mt-4 font-heading text-3xl">
-            Our <span className="text-accent">Courses</span>
-          </h1>
-          <p className="mt-2 max-w-md text-sm text-white/70">
-            Discover upcoming programs, conferences, fellowship, and gathering. Join us and grow in faith together.
-          </p>
-        </PageContainer>
-      </div>
+      <PageHero image={images.kirarPlayersRow} imageAlt="Students with traditional kirar instruments">
+        <Breadcrumb items={[{ label: 'Home', to: '/' }, { label: 'Courses' }]} />
+        <h1 className="mt-4 font-heading text-3xl">
+          Our <span className="text-accent">Courses</span>
+        </h1>
+        <p className="mt-2 max-w-md text-sm text-white/70">
+          Discover upcoming programs, conferences, fellowship, and gathering. Join us and grow in faith together.
+        </p>
+      </PageHero>
 
       <PageContainer className="py-10">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

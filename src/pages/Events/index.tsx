@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { PageContainer } from '@components/layout/PageContainer';
-import { Breadcrumb, ImagePlaceholder, Pagination, SearchInput, Select } from '@components/ui';
+import { PageHero } from '@components/layout/PageHero';
+import { Breadcrumb, Pagination, SearchInput, Select } from '@components/ui';
+import { images } from '@/assets/images';
 import { useEvents } from '@features/events/hooks/useEvents';
 import { EventCard } from '@features/events/components/EventCard';
 import { EventFiltersSidebar } from '@features/events/components/EventFiltersSidebar';
@@ -25,18 +27,15 @@ export default function Events() {
 
   return (
     <div>
-      <div className="relative overflow-hidden bg-ink text-white">
-        <ImagePlaceholder aspect="aspect-video" tone="dark" className="absolute inset-0 h-full w-full rounded-none opacity-40" />
-        <PageContainer className="relative py-14">
-          <Breadcrumb items={[{ label: 'Home', to: '/' }, { label: 'Events' }]} />
-          <h1 className="mt-4 font-heading text-3xl">
-            Our <span className="text-accent">Events</span>
-          </h1>
-          <p className="mt-2 max-w-md text-sm text-white/70">
-            Discover upcoming programs, conferences, fellowship, and gatherings. Join us and grow in faith together.
-          </p>
-        </PageContainer>
-      </div>
+      <PageHero image={images.churchExteriorFestive} imageAlt="Festively decorated church exterior">
+        <Breadcrumb items={[{ label: 'Home', to: '/' }, { label: 'Events' }]} />
+        <h1 className="mt-4 font-heading text-3xl">
+          Our <span className="text-accent">Events</span>
+        </h1>
+        <p className="mt-2 max-w-md text-sm text-white/70">
+          Discover upcoming programs, conferences, fellowship, and gatherings. Join us and grow in faith together.
+        </p>
+      </PageHero>
 
       <PageContainer className="py-10">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

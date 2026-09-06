@@ -1,5 +1,6 @@
 import { PageContainer } from '@components/layout/PageContainer';
 import { Breadcrumb, Button, ImagePlaceholder } from '@components/ui';
+import { images } from '@/assets/images';
 import { useFeaturedIssue, usePastIssues } from '@features/magazine/hooks/useMagazine';
 
 export default function Magazine() {
@@ -16,7 +17,7 @@ export default function Magazine() {
         {featured && (
           <div className="grid gap-6 sm:grid-cols-[220px_1fr]">
             <div className="relative overflow-hidden rounded-xl">
-              <ImagePlaceholder aspect="aspect-[3/4]" />
+              <ImagePlaceholder aspect="aspect-[3/4]" src={images.threeSaintsIcon} alt={featured.title} />
               <div className="absolute inset-x-0 bottom-0 bg-primary-dark/90 p-3 text-white">
                 <p className="text-xs text-white/70">{featured.coverLabel}</p>
                 <p className="font-heading text-sm uppercase">{featured.title}</p>
@@ -40,7 +41,7 @@ export default function Magazine() {
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {pastIssues.map((issue) => (
             <div key={issue.id} className="flex gap-4 overflow-hidden rounded-2xl bg-white p-4 shadow-sm">
-              <ImagePlaceholder aspect="aspect-[3/4]" className="w-24 shrink-0" />
+              <ImagePlaceholder aspect="aspect-[3/4]" src={images.threeSaintsIcon} alt={issue.description} className="w-24 shrink-0" />
               <div className="flex flex-col justify-center">
                 <h3 className="font-heading text-base text-primary-dark">{issue.description}</h3>
                 <p className="mt-1 text-xs text-primary-dark/50">{issue.coverLabel}</p>

@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, ImagePlaceholder, Input } from '@components/ui';
+import { images } from '@/assets/images';
 import { useAuth } from '@hooks/useAuth';
 import { loginSchema, type LoginFormValues } from './loginSchema';
 
@@ -24,11 +25,17 @@ export default function Login() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-ink px-4 py-16">
-      <ImagePlaceholder aspect="aspect-video" tone="dark" className="absolute inset-0 h-full w-full rounded-none opacity-30" />
+      <ImagePlaceholder
+        aspect="aspect-video"
+        tone="dark"
+        src={images.ornateChurchInterior}
+        alt="Church interior"
+        className="absolute inset-0 h-full w-full rounded-none opacity-30"
+      />
       <div className="absolute inset-0 bg-ink/40" aria-hidden="true" />
 
       <div className="relative w-full max-w-md rounded-2xl bg-ink p-8 text-center shadow-xl sm:p-10">
-        <ImagePlaceholder round className="mx-auto h-20 w-20" tone="dark" />
+        <ImagePlaceholder round className="mx-auto h-20 w-20" src={images.orgSealLogo} alt="AASTU Gibigubae" />
         <h1 className="mt-6 font-heading text-2xl text-white">Welcome Back!</h1>
         <p className="mt-1 text-sm text-white/60">Sign in to your Gibi Gubae account</p>
 

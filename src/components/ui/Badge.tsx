@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import clsx from 'clsx';
 
-type BadgeTone = 'onImage' | 'neutral';
+type BadgeTone = 'onImage' | 'neutral' | 'accent';
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   tone?: BadgeTone;
@@ -11,6 +11,8 @@ const TONE_CLASSES: Record<BadgeTone, string> = {
   // Sits on top of a photo (event/course category tag) — semi-opaque white chip.
   onImage: 'bg-white/85 text-primary-dark backdrop-blur-sm',
   neutral: 'bg-primary/10 text-primary',
+  // Solid gold — role badges (e.g. "member"), standout status chips.
+  accent: 'bg-accent text-primary-dark',
 };
 
 export function Badge({ tone = 'neutral', className, ...rest }: BadgeProps) {

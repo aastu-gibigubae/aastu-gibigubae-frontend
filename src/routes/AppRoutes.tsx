@@ -12,11 +12,13 @@ import Contact from '@pages/Contact';
 import About from '@pages/About';
 import Login from '@pages/Login';
 import Register from '@pages/Register';
+import Profile from '@pages/Profile';
+import RecordedSessions from '@pages/RecordedSessions';
+import Announcements from '@pages/Announcements';
+import { ProtectedRoute } from '@components/routing/ProtectedRoute';
 import UiPreview from '@pages/UiPreview'; // TEMPORARY — remove with milestone 3
 
 /**
- * Auth/role guards (ProtectedRoute, per Visitor/Registered/Sub-Admin/Admin
- * from the docs) get added here in milestone 4, once authStore exists.
  * Admin routes get their own layout — not nested under MainLayout — added
  * alongside the admin feature.
  */
@@ -36,6 +38,16 @@ export function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/media" element={<RecordedSessions />} />
+        <Route path="/announcements" element={<Announcements />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         {/* TEMPORARY — remove this route once milestone 3 (Home page) uses these components for real */}
         <Route path="/_ui" element={<UiPreview />} />
       </Route>

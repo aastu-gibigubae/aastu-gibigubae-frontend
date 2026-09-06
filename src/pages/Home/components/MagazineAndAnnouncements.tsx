@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { Card, ImagePlaceholder, buttonStyles } from '@components/ui';
+import { images } from '@/assets/images';
 import { latestAnnouncements, latestMagazine } from '../mockData';
 
 export function MagazineAndAnnouncements() {
@@ -15,7 +16,7 @@ export function MagazineAndAnnouncements() {
             </Link>
           </div>
           <div className="mt-6 max-w-xs">
-            <Card media={<ImagePlaceholder />}>
+            <Card media={<ImagePlaceholder src={images.threeSaintsIcon} alt={latestMagazine.title} />}>
               <p className="text-xs text-primary-dark/50">{latestMagazine.issueLabel}</p>
               <h3 className="mt-1 font-heading text-sm uppercase text-primary-dark">{latestMagazine.title}</h3>
               <Link
@@ -31,7 +32,7 @@ export function MagazineAndAnnouncements() {
         <div>
           <div className="flex items-end justify-between">
             <h2 className="font-heading text-xl text-primary-dark">Latest Announcements</h2>
-            <Link to="/contact" className="text-sm font-body text-primary hover:underline">
+            <Link to="/announcements" className="text-sm font-body text-primary hover:underline">
               See all notice →
             </Link>
           </div>

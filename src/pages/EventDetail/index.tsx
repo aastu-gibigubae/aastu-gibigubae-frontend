@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { Breadcrumb, Button, ImagePlaceholder } from '@components/ui';
+import { photoFromPool, images } from '@/assets/images';
 import { useEvent, useRelatedEvents } from '@features/events/hooks/useEvents';
 import { EventCard } from '@features/events/components/EventCard';
 
@@ -24,7 +25,12 @@ export default function EventDetail() {
   return (
     <div>
       <div className="relative">
-        <ImagePlaceholder aspect="aspect-[16/7]" className="rounded-none" />
+        <ImagePlaceholder
+          aspect="aspect-[16/7]"
+          src={photoFromPool(Number(event.id))}
+          alt={event.title}
+          className="rounded-none"
+        />
         <div className="absolute bottom-4 left-4 rounded-lg bg-primary-dark/90 px-4 py-2 text-center text-white sm:bottom-8 sm:left-8">
           <p className="text-xs uppercase tracking-wide">{event.dateLabel.split(' ')[0]}</p>
           <p className="font-heading text-2xl leading-none">{event.dateLabel.split(' ')[1]?.replace(',', '')}</p>
@@ -63,7 +69,7 @@ export default function EventDetail() {
             <div className="rounded-2xl bg-surface p-5">
               <h2 className="font-heading text-sm text-primary-dark">Organizer</h2>
               <div className="mt-3 flex items-center gap-3">
-                <ImagePlaceholder round className="h-10 w-10" />
+                <ImagePlaceholder round className="h-10 w-10" src={images.orgSealLogo} alt={event.organizer} />
                 <div>
                   <p className="text-sm font-medium text-primary-dark">{event.organizer}</p>
                   <p className="text-xs text-primary-dark/50">Student Organizer</p>

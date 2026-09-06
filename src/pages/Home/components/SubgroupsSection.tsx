@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { ImagePlaceholder, buttonStyles } from '@components/ui';
+import { images } from '@/assets/images';
 import { featuredSubgroup } from '../mockData';
 
 export function SubgroupsSection() {
@@ -18,7 +19,12 @@ export function SubgroupsSection() {
         </div>
 
         <div className="relative mt-6 overflow-hidden rounded-2xl">
-          <ImagePlaceholder aspect="aspect-[21/9]" className="rounded-none" />
+          <ImagePlaceholder
+            aspect="aspect-[21/9]"
+            src={images.outdoorProcession1}
+            alt="Subgroup procession"
+            className="rounded-none"
+          />
 
           <div className="absolute inset-y-0 left-0 flex w-full max-w-sm items-center p-4 sm:p-8">
             <div className="rounded-2xl bg-white p-6 shadow-lg">

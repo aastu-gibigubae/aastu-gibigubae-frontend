@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { Card, ImagePlaceholder } from '@components/ui';
+import { photoFromPool } from '@/assets/images';
 import { academicResources } from '../mockData';
 
 export function AcademicResources() {
@@ -18,9 +19,9 @@ export function AcademicResources() {
         </div>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
-          {academicResources.map((resource) => (
+          {academicResources.map((resource, index) => (
             <Link key={resource.id} to={`/courses/${resource.id}`} className="block">
-              <Card media={<ImagePlaceholder />}>
+              <Card media={<ImagePlaceholder src={photoFromPool(index)} alt={resource.title} />}>
                 <h3 className="font-heading text-base text-primary-dark">{resource.title}</h3>
                 <p className="mt-1 text-xs text-primary-dark/50">{resource.author}</p>
                 <p className="mt-2 text-xs text-primary-dark/50">

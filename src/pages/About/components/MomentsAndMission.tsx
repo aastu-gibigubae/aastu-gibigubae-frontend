@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { ImagePlaceholder, buttonStyles } from '@components/ui';
+import { images } from '@/assets/images';
 
 export function MomentsOfFaith() {
   return (
@@ -8,9 +9,9 @@ export function MomentsOfFaith() {
       <PageContainer>
         <h2 className="text-center font-heading text-xl text-primary-dark">Moments of Faith</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          <ImagePlaceholder aspect="aspect-square" />
-          <ImagePlaceholder aspect="aspect-square" />
-          <ImagePlaceholder aspect="aspect-square" />
+          <ImagePlaceholder aspect="aspect-square" src={images.outdoorProcession1} alt="Outdoor procession" />
+          <ImagePlaceholder aspect="aspect-square" src={images.choirDrumPerformance} alt="Choir performance" />
+          <ImagePlaceholder aspect="aspect-square" src={images.candlelightCrowd1} alt="Candlelight gathering" />
         </div>
         <div className="mt-6 text-center">
           <button
@@ -40,7 +41,13 @@ export function JoinOurMission() {
               Get Involved
             </Link>
           </div>
-          <ImagePlaceholder aspect="aspect-video" tone="dark" className="rounded-none" />
+          <ImagePlaceholder
+            aspect="aspect-video"
+            tone="dark"
+            src={images.outdoorProcession2}
+            alt="Community outreach"
+            className="rounded-none"
+          />
         </div>
       </PageContainer>
     </section>

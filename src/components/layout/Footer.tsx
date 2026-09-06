@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from './PageContainer';
+import { images } from '@/assets/images';
 
 const QUICK_LINKS = [
   { label: 'Kflat', to: '/subgroups' },
@@ -22,7 +23,7 @@ export function Footer() {
       <PageContainer className="grid grid-cols-1 gap-10 py-12 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="h-10 w-10 rounded-full bg-white/10" aria-hidden="true" />
+            <img src={images.orgSealLogo} alt="AASTU Gibigubae" className="h-10 w-10 rounded-full object-cover" />
           </div>
           <div className="mt-4 space-y-2 text-sm text-white/70">
             <p>AASTU, Addis Ababa, Ethiopia</p>

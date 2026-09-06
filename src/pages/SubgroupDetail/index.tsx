@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { Breadcrumb, ImagePlaceholder } from '@components/ui';
+import { photoFromPool } from '@/assets/images';
 import { useSubgroup } from '@features/subgroups/hooks/useSubgroups';
 
 export default function SubgroupDetail() {
@@ -21,7 +22,12 @@ export default function SubgroupDetail() {
 
   return (
     <div>
-      <ImagePlaceholder aspect="aspect-[21/9]" className="rounded-none" />
+      <ImagePlaceholder
+        aspect="aspect-[21/9]"
+        src={photoFromPool(Number(subgroup.id))}
+        alt={subgroup.name}
+        className="rounded-none"
+      />
       <PageContainer className="py-10">
         <Breadcrumb
           items={[{ label: 'Home', to: '/' }, { label: 'Subgroups', to: '/subgroups' }, { label: subgroup.name }]}

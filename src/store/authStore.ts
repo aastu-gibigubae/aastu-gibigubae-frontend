@@ -12,6 +12,8 @@ interface AuthState {
   /** Called on logout or when a refresh attempt fails. */
   clearSession: () => void;
   setStatus: (status: AuthStatus) => void;
+  /** No backend endpoint exists for profile updates yet — this patches the local user optimistically. */
+  updateUser: (patch: Partial<User>) => void;
 }
 
 /**
@@ -30,4 +32,5 @@ export const useAuthStore = create<AuthState>((set) => ({
   setSession: ({ user, accessToken }) => set({ user, accessToken, status: 'authenticated' }),
   clearSession: () => set({ user: null, accessToken: null, status: 'unauthenticated' }),
   setStatus: (status) => set({ status }),
+  updateUser: (patch) => set((state) => (state.user ? { user: { ...state.user, ...patch } } : state)),
 }));

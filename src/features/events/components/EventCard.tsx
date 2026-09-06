@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Badge, Card, ImagePlaceholder, buttonStyles } from '@components/ui';
+import { photoFromPool } from '@/assets/images';
 import type { EventItem } from '../types';
 
 const CATEGORY_LABEL: Record<EventItem['category'], string> = {
@@ -14,7 +15,7 @@ export function EventCard({ event }: { event: EventItem }) {
     <Card
       media={
         <>
-          <ImagePlaceholder />
+          <ImagePlaceholder src={photoFromPool(Number(event.id))} alt={event.title} />
           <Badge tone="onImage" className="absolute left-2 top-2">
             {CATEGORY_LABEL[event.category]}
           </Badge>

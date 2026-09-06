@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { ImagePlaceholder } from '@components/ui';
+import { images } from '@/assets/images';
 import { recordedSessions } from '../mockData';
+
+const SESSION_PHOTOS = [images.choirDrumPerformance, images.kirarPlayersRow, images.aerialCongregation];
 
 export function RecordedSessions() {
   return (
@@ -14,15 +17,20 @@ export function RecordedSessions() {
               Catch up on missed lectures, guest speakers, and spiritual reflections from our video library
             </p>
           </div>
-          <Link to="/magazine" className="whitespace-nowrap text-sm font-body text-accent hover:underline">
+          <Link to="/media" className="whitespace-nowrap text-sm font-body text-accent hover:underline">
             view more →
           </Link>
         </div>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
-          {recordedSessions.map((session) => (
+          {recordedSessions.map((session, index) => (
             <div key={session.id} className="overflow-hidden rounded-2xl bg-white/5">
-              <ImagePlaceholder tone="dark" className="rounded-none" />
+              <ImagePlaceholder
+                tone="dark"
+                src={SESSION_PHOTOS[index % SESSION_PHOTOS.length]}
+                alt={session.title}
+                className="rounded-none"
+              />
               <div className="p-4">
                 <h3 className="font-heading text-sm">{session.title}</h3>
                 <p className="mt-1 text-xs text-white/60">{session.speaker}</p>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { Card, ImagePlaceholder, buttonStyles } from '@components/ui';
+import { photoFromPool } from '@/assets/images';
 import { upcomingEvents } from '../mockData';
 
 export function UpcomingEvents() {
@@ -18,8 +19,8 @@ export function UpcomingEvents() {
         </div>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
-          {upcomingEvents.map((event) => (
-            <Card key={event.id} media={<ImagePlaceholder />}>
+          {upcomingEvents.map((event, index) => (
+            <Card key={event.id} media={<ImagePlaceholder src={photoFromPool(index)} alt={event.title} />}>
               <p className="text-xs text-primary-dark/50">
                 {event.date} &middot; {event.time}
               </p>

@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Card, ImagePlaceholder, buttonStyles } from '@components/ui';
+import { photoFromPool } from '@/assets/images';
 import type { Subgroup } from '../types';
 
 export function SubgroupCard({ subgroup }: { subgroup: Subgroup }) {
   return (
-    <Card media={<ImagePlaceholder aspect="aspect-[4/3]" />}>
+    <Card media={<ImagePlaceholder aspect="aspect-[4/3]" src={photoFromPool(Number(subgroup.id))} alt={subgroup.name} />}>
       <h3 className="font-heading text-lg text-primary-dark">{subgroup.name}</h3>
       <p className="mt-2 text-sm text-primary-dark/60">{subgroup.description}</p>
       <ul className="mt-4 space-y-2">
