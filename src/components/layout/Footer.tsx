@@ -3,10 +3,13 @@ import { PageContainer } from './PageContainer';
 import { images } from '@/assets/images';
 
 const QUICK_LINKS = [
+  // Real kiflats have UUIDs, not stable slugs, so these all point to the
+  // list page rather than guessing at a specific one.
   { label: 'Kflat', to: '/subgroups' },
-  { label: 'Lebawie', to: '/subgroups/lebawie' },
-  { label: 'Meklit', to: '/subgroups/meklit' },
+  { label: 'Lebawie', to: '/subgroups' },
+  { label: 'Meklit', to: '/subgroups' },
   { label: 'About Us', to: '/about' },
+  { label: 'Give', to: '/give' },
 ] as const;
 
 const MEDIA_LINKS = [

@@ -12,3 +12,4 @@ export { Breadcrumb } from './Breadcrumb';
 export type { BreadcrumbItem } from './Breadcrumb';
 export { Pagination } from './Pagination';
 export { SearchInput } from './SearchInput';
+export { Modal } from './Modal';

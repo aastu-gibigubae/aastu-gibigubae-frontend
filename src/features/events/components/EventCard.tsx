@@ -1,49 +1,31 @@
 import { Link } from 'react-router-dom';
-import { Badge, Card, ImagePlaceholder, buttonStyles } from '@components/ui';
+import { Card, ImagePlaceholder, buttonStyles } from '@components/ui';
 import { photoFromPool } from '@/assets/images';
 import type { EventItem } from '../types';
-
-const CATEGORY_LABEL: Record<EventItem['category'], string> = {
-  worship: 'Worship',
-  seminar: 'Seminar',
-  course: 'Course',
-  conference: 'Conference',
-};
+import { formatEventDate, formatEventTime } from '../format';
 
 export function EventCard({ event }: { event: EventItem }) {
   return (
-    <Card
-      media={
-        <>
-          <ImagePlaceholder src={photoFromPool(Number(event.id))} alt={event.title} />
-          <Badge tone="onImage" className="absolute left-2 top-2">
-            {CATEGORY_LABEL[event.category]}
-          </Badge>
-        </>
-      }
-    >
-      <p className="text-xs text-primary-dark/50">{event.dateLabel}</p>
+    <Card media={<ImagePlaceholder src={event.image_url ?? photoFromPool(Number(event.id) || 0)} alt={event.title} />}>
+      <p className="text-xs text-primary-dark/50">{formatEventDate(event.event_date)}</p>
       <h3 className="mt-1 font-heading text-base text-primary-dark">{event.title}</h3>
       <p className="mt-1 line-clamp-2 text-xs text-primary-dark/60">{event.description}</p>
 
       <div className="mt-3 flex items-center gap-1.5 text-xs text-primary-dark/50">
         <ClockIcon className="h-3.5 w-3.5" />
-        {event.time}
+        {formatEventTime(event.event_date)}
       </div>
       <div className="mt-1 flex items-center gap-1.5 text-xs text-primary-dark/50">
         <PinIcon className="h-3.5 w-3.5" />
         {event.location}
       </div>
 
-      <div className="mt-3 flex items-center justify-between border-t border-primary-dark/10 pt-3">
-        <div>
-          <p className="text-[11px] text-primary-dark/40">Organizer</p>
-          <p className="text-xs text-primary-dark/70">{event.organizer}</p>
-        </div>
-        <Link to={`/events/${event.id}`} className={buttonStyles({ variant: 'outline', size: 'sm' })}>
-          Details &gt;
-        </Link>
-      </div>
+      <Link
+        to={`/events/${event.id}`}
+        className={buttonStyles({ variant: 'outline', size: 'sm', fullWidth: true, className: 'mt-3' })}
+      >
+        Details &gt;
+      </Link>
     </Card>
   );
 }

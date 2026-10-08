@@ -2,6 +2,12 @@ import axios from 'axios';
 import { useAuthStore } from '@store/authStore';
 import { refresh as refreshSession } from './authApi';
 
+if (!import.meta.env.VITE_API_BASE_URL) {
+  // Vite inlines env vars at BUILD time — a deploy without this set will send
+  // every request to the frontend's own origin and get index.html back.
+  console.warn('VITE_API_BASE_URL is not set; API calls will fail. Set it in your host and redeploy.');
+}
+
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,

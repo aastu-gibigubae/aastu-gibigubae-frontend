@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
-import { Card, ImagePlaceholder, buttonStyles } from '@components/ui';
-import { photoFromPool } from '@/assets/images';
-import { upcomingEvents } from '../mockData';
+import { useEvents } from '@features/events/hooks/useEvents';
+import { EventCard } from '@features/events/components/EventCard';
+import { DEFAULT_EVENT_FILTERS } from '@features/events/types';
 
 export function UpcomingEvents() {
+  const { data, isLoading } = useEvents(DEFAULT_EVENT_FILTERS, 1);
+  const events = data?.items.slice(0, 3) ?? [];
+
+  if (!isLoading && events.length === 0) return null;
+
   return (
     <section className="py-14">
       <PageContainer>
@@ -18,23 +23,15 @@ export function UpcomingEvents() {
           </Link>
         </div>
 
-        <div className="mt-6 grid gap-6 sm:grid-cols-3">
-          {upcomingEvents.map((event, index) => (
-            <Card key={event.id} media={<ImagePlaceholder src={photoFromPool(index)} alt={event.title} />}>
-              <p className="text-xs text-primary-dark/50">
-                {event.date} &middot; {event.time}
-              </p>
-              <h3 className="mt-1 font-heading text-base text-primary-dark">{event.title}</h3>
-              <p className="mt-1 text-xs text-primary-dark/50">{event.location}</p>
-              <Link
-                to={`/events/${event.id}`}
-                className={buttonStyles({ variant: 'outline', size: 'sm', fullWidth: true, className: 'mt-4' })}
-              >
-                View Details
-              </Link>
-            </Card>
-          ))}
-        </div>
+        {isLoading ? (
+          <p className="mt-6 text-sm text-primary-dark/50">Loading…</p>
+        ) : (
+          <div className="mt-6 grid gap-6 sm:grid-cols-3">
+            {events.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        )}
       </PageContainer>
     </section>
   );

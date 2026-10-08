@@ -16,11 +16,7 @@ export const missionVisionValues = [
   },
 ];
 
-export const leaders = [
-  { id: '1', name: 'John Doe', role: 'Gibigubae Main Leader' },
-  { id: '2', name: 'John Doe', role: 'Gibigubae Vice Leader' },
-  { id: '3', name: 'John Doe', role: 'Gibigubae Secretary' },
-];
+// Leaders now come from the real GET /api/leaders — see features/leaders.
 
 export const journeyMilestones = [
   {

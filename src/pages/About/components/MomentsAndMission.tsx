@@ -14,12 +14,9 @@ export function MomentsOfFaith() {
           <ImagePlaceholder aspect="aspect-square" src={images.candlelightCrowd1} alt="Candlelight gathering" />
         </div>
         <div className="mt-6 text-center">
-          <button
-            type="button"
-            className={buttonStyles({ variant: 'outline', pill: true })}
-          >
+          <Link to="/gallery" className={buttonStyles({ variant: 'outline', pill: true })}>
             View more photos
-          </button>
+          </Link>
         </div>
       </PageContainer>
     </section>

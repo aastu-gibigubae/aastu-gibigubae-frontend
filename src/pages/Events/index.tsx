@@ -5,13 +5,11 @@ import { Breadcrumb, Pagination, SearchInput, Select } from '@components/ui';
 import { images } from '@/assets/images';
 import { useEvents } from '@features/events/hooks/useEvents';
 import { EventCard } from '@features/events/components/EventCard';
-import { EventFiltersSidebar } from '@features/events/components/EventFiltersSidebar';
 import { DEFAULT_EVENT_FILTERS, type EventFilters } from '@features/events/types';
 
 const SORT_OPTIONS = [
-  { value: 'upcoming', label: 'Upcoming First' },
-  { value: 'newest', label: 'Newest' },
-  { value: 'oldest', label: 'Oldest' },
+  { value: 'newest', label: 'Newest First' },
+  { value: 'oldest', label: 'Oldest First' },
 ];
 
 export default function Events() {
@@ -40,7 +38,7 @@ export default function Events() {
       <PageContainer className="py-10">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <SearchInput
-            placeholder="Search events by title, speaker, keyword"
+            placeholder="Search events by title or location"
             className="max-w-md flex-1"
             value={filters.search}
             onChange={(e) => updateFilters({ ...filters, search: e.target.value })}
@@ -55,29 +53,25 @@ export default function Events() {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[280px_1fr]">
-          <EventFiltersSidebar filters={filters} onChange={updateFilters} />
+        <div className="mt-8">
+          {isLoading && <p className="py-12 text-center text-sm text-primary-dark/50">Loading events…</p>}
+          {isError && (
+            <p className="py-12 text-center text-sm text-red-500">Couldn't load events right now. Please try again.</p>
+          )}
+          {data && data.items.length === 0 && (
+            <p className="py-12 text-center text-sm text-primary-dark/50">No events match your search.</p>
+          )}
 
-          <div>
-            {isLoading && <p className="py-12 text-center text-sm text-primary-dark/50">Loading events…</p>}
-            {isError && (
-              <p className="py-12 text-center text-sm text-red-500">Couldn't load events right now. Please try again.</p>
-            )}
-            {data && data.items.length === 0 && (
-              <p className="py-12 text-center text-sm text-primary-dark/50">No events match your filters.</p>
-            )}
-
-            {data && data.items.length > 0 && (
-              <>
-                <div className="grid gap-6 sm:grid-cols-2">
-                  {data.items.map((event) => (
-                    <EventCard key={event.id} event={event} />
-                  ))}
-                </div>
-                <Pagination page={page} totalPages={data.totalPages} onPageChange={setPage} className="mt-10" />
-              </>
-            )}
-          </div>
+          {data && data.items.length > 0 && (
+            <>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {data.items.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+              <Pagination page={page} totalPages={data.totalPages} onPageChange={setPage} className="mt-10" />
+            </>
+          )}
         </div>
       </PageContainer>
     </div>

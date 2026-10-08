@@ -1,8 +1,11 @@
+/** Matches GET /api/magazines response exactly (AASTU Gibi Gubae API docs §5). */
 export interface MagazineIssue {
   id: string;
   title: string;
-  coverLabel: string; // e.g. "Latest Issue: May 2026"
-  releasedLabel: string; // e.g. "Released: June 24, 2019"
-  description: string;
-  isFeatured: boolean;
+  cover_image: string | null;
+  content: string | null;
+  pdf_url: string;
+  published_at: string;
+  created_at: string;
+  updated_at: string;
 }

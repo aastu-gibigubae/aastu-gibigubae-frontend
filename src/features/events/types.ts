@@ -1,36 +1,27 @@
-export type EventCategory = 'worship' | 'seminar' | 'course' | 'conference';
-export type EventStatus = 'upcoming' | 'past' | 'featured';
-
+/**
+ * Matches GET /api/events response exactly (AASTU Gibi Gubae API docs §1).
+ * No category/status/organizer/highlights fields exist on the real entity —
+ * those were mock-only richness from before the backend existed.
+ */
 export interface EventItem {
   id: string;
   title: string;
-  category: EventCategory;
   description: string;
-  /** Display-formatted date string, e.g. "Tire 24, 2019" — matches the design's own date format. */
-  dateLabel: string;
-  /** ISO date, used for sorting/filtering. */
-  isoDate: string;
-  time: string;
+  image_url: string | null;
   location: string;
-  organizer: string;
-  status: EventStatus;
-  highlights: string[];
+  event_date: string; // ISO datetime
+  is_published: boolean;
+  userId: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface EventFilters {
   search: string;
-  categories: EventCategory[];
-  statuses: EventStatus[];
-  date: string; // ISO date or ''
-  location: string; // '' = all locations
-  sort: 'upcoming' | 'newest' | 'oldest';
+  sort: 'newest' | 'oldest';
 }
 
 export const DEFAULT_EVENT_FILTERS: EventFilters = {
   search: '',
-  categories: [],
-  statuses: [],
-  date: '',
-  location: '',
-  sort: 'upcoming',
+  sort: 'newest',
 };

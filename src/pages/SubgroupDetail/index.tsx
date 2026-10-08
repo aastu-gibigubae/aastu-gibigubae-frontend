@@ -5,8 +5,8 @@ import { photoFromPool } from '@/assets/images';
 import { useSubgroup } from '@features/subgroups/hooks/useSubgroups';
 
 export default function SubgroupDetail() {
-  const { slug } = useParams<{ slug: string }>();
-  const { data: subgroup, isLoading, isError } = useSubgroup(slug);
+  const { id } = useParams<{ id: string }>();
+  const { data: subgroup, isLoading, isError } = useSubgroup(id);
 
   if (isLoading) {
     return <PageContainer className="py-16 text-center text-sm text-primary-dark/50">Loading…</PageContainer>;
@@ -24,7 +24,7 @@ export default function SubgroupDetail() {
     <div>
       <ImagePlaceholder
         aspect="aspect-[21/9]"
-        src={photoFromPool(Number(subgroup.id))}
+        src={subgroup.image_urls[0] ?? photoFromPool(Number(subgroup.id) || 0)}
         alt={subgroup.name}
         className="rounded-none"
       />
@@ -33,19 +33,25 @@ export default function SubgroupDetail() {
           items={[{ label: 'Home', to: '/' }, { label: 'Subgroups', to: '/subgroups' }, { label: subgroup.name }]}
         />
         <h1 className="mt-4 font-heading text-3xl text-primary-dark">{subgroup.name}</h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-primary-dark/70">{subgroup.description}</p>
+        {subgroup.description && (
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-primary-dark/70">{subgroup.description}</p>
+        )}
 
-        <h2 className="mt-8 font-heading text-lg text-primary-dark">Sub-groups</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {subgroup.subSubgroups.map((name, index) => (
-            <li key={index} className="flex items-center gap-2 rounded-lg bg-surface px-4 py-3 text-sm text-primary-dark/80">
-              <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded bg-accent text-primary-dark">
-                <CheckIcon className="h-3 w-3" />
-              </span>
-              {name}
-            </li>
-          ))}
-        </ul>
+        {subgroup.sub_kiflat.length > 0 && (
+          <>
+            <h2 className="mt-8 font-heading text-lg text-primary-dark">Sub-groups</h2>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {subgroup.sub_kiflat.map((sub) => (
+                <li key={sub.id} className="flex items-center gap-2 rounded-lg bg-surface px-4 py-3 text-sm text-primary-dark/80">
+                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded bg-accent text-primary-dark">
+                    <CheckIcon className="h-3 w-3" />
+                  </span>
+                  {sub.name}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </PageContainer>
     </div>
   );

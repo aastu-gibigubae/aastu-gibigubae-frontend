@@ -2,9 +2,14 @@ import { Link } from 'react-router-dom';
 import { PageContainer } from '@components/layout/PageContainer';
 import { ImagePlaceholder, buttonStyles } from '@components/ui';
 import { images } from '@/assets/images';
-import { featuredSubgroup } from '../mockData';
+import { useSubgroups } from '@features/subgroups/hooks/useSubgroups';
 
 export function SubgroupsSection() {
+  const { data: subgroups, isLoading } = useSubgroups();
+  const featured = subgroups?.[0];
+
+  if (!isLoading && !featured) return null;
+
   return (
     <section className="py-14">
       <PageContainer>
@@ -18,37 +23,43 @@ export function SubgroupsSection() {
           </Link>
         </div>
 
-        <div className="relative mt-6 overflow-hidden rounded-2xl">
-          <ImagePlaceholder
-            aspect="aspect-[21/9]"
-            src={images.outdoorProcession1}
-            alt="Subgroup procession"
-            className="rounded-none"
-          />
+        {isLoading && <p className="mt-6 text-sm text-primary-dark/50">Loading…</p>}
 
-          <div className="absolute inset-y-0 left-0 flex w-full max-w-sm items-center p-4 sm:p-8">
-            <div className="rounded-2xl bg-white p-6 shadow-lg">
-              <h3 className="font-heading text-lg text-primary-dark">{featuredSubgroup.name}</h3>
-              <p className="mt-2 text-sm text-primary-dark/60">{featuredSubgroup.description}</p>
-              <ul className="mt-4 space-y-2">
-                {featuredSubgroup.subSubgroups.map((name, index) => (
-                  <li key={index} className="flex items-center gap-2 text-sm text-primary-dark/80">
-                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded bg-accent text-primary-dark">
-                      <CheckIcon className="h-3 w-3" />
-                    </span>
-                    {name}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/subgroups"
-                className={buttonStyles({ variant: 'outline', size: 'sm', className: 'mt-5' })}
-              >
-                Learn more
-              </Link>
+        {featured && (
+          <div className="relative mt-6 overflow-hidden rounded-2xl">
+            <ImagePlaceholder
+              aspect="aspect-[21/9]"
+              src={featured.image_urls[0] ?? images.outdoorProcession1}
+              alt={featured.name}
+              className="rounded-none"
+            />
+
+            <div className="absolute inset-y-0 left-0 flex w-full max-w-sm items-center p-4 sm:p-8">
+              <div className="rounded-2xl bg-white p-6 shadow-lg">
+                <h3 className="font-heading text-lg text-primary-dark">{featured.name}</h3>
+                {featured.description && <p className="mt-2 text-sm text-primary-dark/60">{featured.description}</p>}
+                {featured.sub_kiflat.length > 0 && (
+                  <ul className="mt-4 space-y-2">
+                    {featured.sub_kiflat.map((sub) => (
+                      <li key={sub.id} className="flex items-center gap-2 text-sm text-primary-dark/80">
+                        <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded bg-accent text-primary-dark">
+                          <CheckIcon className="h-3 w-3" />
+                        </span>
+                        {sub.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <Link
+                  to={`/subgroups/${featured.id}`}
+                  className={buttonStyles({ variant: 'outline', size: 'sm', className: 'mt-5' })}
+                >
+                  Learn more
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </PageContainer>
     </section>
   );

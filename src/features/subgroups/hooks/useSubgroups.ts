@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { getSubgroupBySlug, getSubgroups } from '../api';
+import { getSubgroupById, getSubgroups } from '../api';
 
 export function useSubgroups() {
   return useQuery({ queryKey: ['subgroups'], queryFn: getSubgroups });
 }
 
-export function useSubgroup(slug: string | undefined) {
+export function useSubgroup(id: string | undefined) {
   return useQuery({
-    queryKey: ['subgroup', slug],
-    queryFn: () => getSubgroupBySlug(slug as string),
-    enabled: Boolean(slug),
+    queryKey: ['subgroup', id],
+    queryFn: () => getSubgroupById(id as string),
+    enabled: Boolean(id),
   });
 }

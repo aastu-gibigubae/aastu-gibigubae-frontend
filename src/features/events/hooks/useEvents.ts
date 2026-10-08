@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { getEventById, getEvents, getRelatedEvents } from '../api';
-import type { EventFilters, EventItem } from '../types';
+import { getEventById, getEvents, getMoreEvents } from '../api';
+import type { EventFilters } from '../types';
 
 export function useEvents(filters: EventFilters, page: number) {
   return useQuery({
     queryKey: ['events', filters, page],
     queryFn: () => getEvents(filters, page),
-    placeholderData: (previous) => previous, // keep old page visible while the next page loads
+    placeholderData: (previous) => previous,
   });
 }
 
@@ -18,10 +18,10 @@ export function useEvent(id: string | undefined) {
   });
 }
 
-export function useRelatedEvents(eventId: string | undefined, category: EventItem['category'] | undefined) {
+export function useMoreEvents(excludeId: string | undefined) {
   return useQuery({
-    queryKey: ['events', 'related', eventId, category],
-    queryFn: () => getRelatedEvents(eventId as string, category as EventItem['category']),
-    enabled: Boolean(eventId && category),
+    queryKey: ['events', 'more', excludeId],
+    queryFn: () => getMoreEvents(excludeId as string),
+    enabled: Boolean(excludeId),
   });
 }

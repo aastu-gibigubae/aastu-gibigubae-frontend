@@ -89,3 +89,26 @@ get, screen by screen as we build each one:
 - A screenshot of the specific screen/frame we're about to build
 - Any spacing/sizing specifics if you have Figma's Dev Mode inspect panel (padding, border
   radius, exact font sizes) — optional, I can estimate from screenshots otherwise
+
+## Deploying (free tier)
+
+The app is a static SPA: `npm run build` → `dist/`. Any static host works; it needs a
+"rewrite everything to index.html" rule (already included: `vercel.json` for Vercel,
+`public/_redirects` for Netlify / Cloudflare Pages).
+
+**Vercel** (recommended): push the repo to GitHub → vercel.com → *Add New → Project* → import it.
+Framework preset *Vite* is auto-detected (build `npm run build`, output `dist`). Add environment variables:
+
+| Variable | Value |
+| --- | --- |
+| `VITE_API_BASE_URL` | public **https** URL of the backend API, e.g. `https://<backend-host>/api` |
+| `VITE_AUTH_BASE_URL` | auth service URL (unused until the auth service exists) |
+| `VITE_ENABLE_DEV_TOOLS` | `true` for a staging deploy (exposes `/dev/admin-login`), otherwise omit |
+
+Vite inlines env vars at **build time** — changing them requires a redeploy.
+
+**Backend requirements for a deployed frontend**
+- `localhost` URLs won't work from a hosted site: the backend must be reachable publicly (Render / Railway / Fly free tiers, or a tunnel such as `cloudflared tunnel --url http://localhost:3000` while developing).
+- Serve it over **https** — browsers block an https page from calling an http API (mixed content).
+- Enable **CORS** for the frontend origin *with credentials* (the client sends `withCredentials: true`), i.e. `Access-Control-Allow-Origin: https://<your-app>.vercel.app` (not `*`) and `Access-Control-Allow-Credentials: true`.
+- `POST /api/dev/mock-token` must stay disabled in production; enable it on staging only.
